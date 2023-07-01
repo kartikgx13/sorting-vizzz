@@ -8,6 +8,46 @@ function randomIntFromInterval(min, max) {
   
 }
 
+function swap(el1, el2) {
+  console.log('In swap()');
+  
+  let temp = el1.style.height;
+  el1.style.height = el2.style.height;
+  el2.style.height = temp;
+  
+}
+
+function waitforme(milisec) { 
+  return new Promise(resolve => { 
+      setTimeout(() => { resolve('') }, milisec); 
+  }) 
+}
+
+let delay = 1;
+
+async function bubble() {
+  console.log('In bubble()');
+  const ele = document.querySelectorAll(".array-bar");
+  for(let i = 0; i < ele.length-1; i++){
+      console.log('In ith loop');
+      for(let j = 0; j < ele.length-i-1; j++){
+          console.log('In jth loop');
+          ele[j].style.background = 'blue';
+          ele[j+1].style.background = 'blue';
+          if(parseInt(ele[j].style.height) > parseInt(ele[j+1].style.height)){
+              console.log('In if condition');
+              await waitforme(delay);
+              swap(ele[j], ele[j+1]);
+          }
+          ele[j].style.background = 'turquoise';
+          ele[j+1].style.background = 'turquoise';
+      }
+      ele[ele.length-1-i].style.background = 'green';
+  }
+  ele[0].style.background = 'green';
+}
+
+
 export default function Home() {
   const [array, setArray] = useState([]);
   const PRIMARY_COLOR = 'turquoise';
@@ -18,7 +58,15 @@ export default function Home() {
       newarray.push(randomIntFromInterval(15, 750));
     }
     setArray(newarray);
+
+    const ele = document.querySelectorAll(".array-bar");
+    for(let i = 0; i < ele.length; i++){
+      ele[i].style.background = 'turquoise';
+  }
+
    }
+   
+
   return (
     <>
      <div className="main-page">
@@ -28,7 +76,7 @@ export default function Home() {
         </div>
         <div className="sorting-btns">
             <button>
-            <span className="button_top">Bubble Sort
+            <span className="button_top" onClick={bubble}>Bubble Sort
             </span>
             </button>
             <button>
