@@ -7,15 +7,18 @@ padding: 0;
 }
 .main-heading{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
     flex-direction: column;
+    gap: 25%;
+    background-color: #434242;
 }
 
 .main-heading h1{
-    margin: 0;
+    height: 5%;
+    color: white;
 }
 
 .navbar-container{
@@ -27,6 +30,7 @@ padding: 0;
     flex-direction: column;
     gap: 10rem;
     background-color: #282828;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .sorting-btns{
@@ -37,36 +41,23 @@ padding: 0;
     gap: 1.5rem;
 }
 
-button {
-    /* Variables */
-    --button_radius: .75em;
-    --button_color: #e8e8e8;
-    --button_outline_color: #000000;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: var(--button_radius);
-    background: var(--button_outline_color);
+.sort-btn {
+    background: white;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
     cursor: pointer;
+    transition: 0.1s ease-out;
   }
   
-  .button_top {
-    display: block;
-    box-sizing: border-box;
-    border: 1px solid var(--button_outline_color);
-    border-radius: var(--button_radius);
-    padding: 0.75em 1.5em;
-    background: var(--button_color);
-    color: var(--button_outline_color);
-    transform: translateY(-0.2em);
-    transition: transform 0.1s ease;
+  .sort-btn:active {
+    transform: translate(0.15em, 0.15em);
+    box-shadow: 0.05em 0.05em;
   }
-  
- 
-  button:active .button_top {
-    /* Push the button downwards when pressed */
-    transform: translateY(0);
-}
 
 .slider-controls{
     display: flex;
@@ -151,22 +142,22 @@ input[type="range"] {
  */
 ::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px; /* 1 */
-    height: 40px;
+    width: 10px; /* 1 */
+    height: 60px;
     background: #fff;
     box-shadow: -200px 0 0 200px grey; /* 2 */
-    border: 2px solid #999; /* 1 */
+    border: 1px solid #999; /* 1 */
 }
 
 ::-moz-range-track {
-    height: 40px;
+    height: 10px;
     background: #ddd;
 }
 
 ::-moz-range-thumb {
     background: #fff;
-    height: 40px;
-    width: 20px;
+    height: 60px;
+    width: 10px;
     border: 3px solid #999;
     border-radius: 0 !important;
     box-shadow: -200px 0 0 200px dodgerblue;
@@ -180,8 +171,8 @@ input[type="range"] {
 ::-ms-thumb { 
     background: #fff;
     border: 2px solid #999;
-    height: 40px;
-    width: 20px;
+    height: 60px;
+    width: 10px;
     box-sizing: border-box;
 }
 
@@ -210,6 +201,8 @@ input[type="range"] {
     align-items: baseline;
     width: 100%;
     margin-bottom: 2rem;
+    height: 95%;
+    gap: 1px;
 }
 
 .array-bar{

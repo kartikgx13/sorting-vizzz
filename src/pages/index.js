@@ -23,9 +23,12 @@ function waitforme(milisec) {
   }) 
 }
 
-let delay = 1;
+
 
 async function bubble() {
+  const arrSpeed = document.getElementById('speed-slider');
+  const delay = 101 - arrSpeed.value;
+
   console.log('In bubble()');
   const ele = document.querySelectorAll(".array-bar");
   for(let i = 0; i < ele.length-1; i++){
@@ -39,8 +42,8 @@ async function bubble() {
               await waitforme(delay);
               swap(ele[j], ele[j+1]);
           }
-          ele[j].style.background = 'turquoise';
-          ele[j+1].style.background = 'turquoise';
+          ele[j].style.background = '#22A39F';
+          ele[j+1].style.background = '#22A39F';
       }
       ele[ele.length-1-i].style.background = 'green';
   }
@@ -50,21 +53,30 @@ async function bubble() {
 
 export default function Home() {
   const [array, setArray] = useState([]);
-  const PRIMARY_COLOR = 'turquoise';
+  const PRIMARY_COLOR = '#22A39F';
   
   const resetArray=()=>{
     const newarray = [];
-    for (let i = 0; i < 150; i++) {
-      newarray.push(randomIntFromInterval(15, 750));
+    const arrSize=document.getElementById('slider');
+    for (let i = 0; i < arrSize.value; i++) {
+      newarray.push(randomIntFromInterval(15, 500));
     }
     setArray(newarray);
 
     const ele = document.querySelectorAll(".array-bar");
     for(let i = 0; i < ele.length; i++){
-      ele[i].style.background = 'turquoise';
+      ele[i].style.background = '#22A39F';
   }
 
    }
+   const handleSizeChange = (event) => {
+    const newSize = event.target.value;
+    const newarray = [];
+    for (let i = 0; i < newSize; i++) {
+      newarray.push(randomIntFromInterval(15, 500));
+    }
+    setArray(newarray);
+  };
    
 
   return (
@@ -75,49 +87,50 @@ export default function Home() {
             New Array
         </div>
         <div className="sorting-btns">
-            <button>
-            <span className="button_top" onClick={bubble}>Bubble Sort
-            </span>
+            <button disabled={array.length==0 ? true : false} className='sort-btn' onClick={bubble}>
+            Bubble Sort
             </button>
-            <button>
-            <span className="button_top">Insertion Sort
-            </span>
+            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            Insertion Sort
             </button>
-            <button>
-            <span className="button_top">Quick Sort
-            </span>
+            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            Quick Sort
             </button>
-            <button>
-            <span className="button_top">Merge Sort
-            </span>
+            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            Merge Sort
             </button>
-            <button>
-            <span className="button_top">Selection Sort
-            </span>
+            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            Selection Sort
             </button>
         </div>
 
         <div className="slider-controls">
             <div>
                 <h1>Speed</h1>
-                <input type="range" className="range-style"></input>
+                <input disabled={array.length==0 ? true : false} id='speed-slider' type="range" min={1} max={100} className="range-style"></input>
             </div>
             <div>
                 <h1>Size</h1>
-                <input type="range" className="range-style"></input>
+                <input disabled={array.length==0 ? true : false} onChange={handleSizeChange} type="range" min={10} max={150} id='slider' className="range-style"></input>
             </div>
         </div>
     </div>
      <div className="main-heading">
      <h1>Sorting Visualizer</h1>
      <div className="sorting-bars">
-     {array.map((value, index) => (
+     {array.length===0 ? (
+      <h1>Click the button to generate an array!!</h1>
+     ):(
+      <div className="sorting-bars">
+        {array.map((value, index) => (
             <div
               key={index}
               className="array-bar"
               style={{ height: `${value}px`,backgroundColor: PRIMARY_COLOR }}
             ></div>
           ))}
+      </div>
+     )}
      </div>
      </div>
      </div>
