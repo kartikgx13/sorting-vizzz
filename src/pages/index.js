@@ -50,6 +50,77 @@ async function bubble() {
   ele[0].style.background = 'green';
 }
 
+function disableBtns(){
+  document.querySelector('#bubble').disabled=true;
+  document.querySelector('#insertion').disabled=true;
+  document.querySelector('#quick').disabled=true;
+  document.querySelector('#merge').disabled=true;
+  document.querySelector('#selection').disabled=true;
+  document.querySelector('#speed-slider').disabled=true;
+  document.querySelector('#slider').disabled=true;
+  document.querySelector('.new-array-btn').disabled=true;
+}
+
+function enableBtns(){
+  document.querySelector('#bubble').disabled=false;
+  document.querySelector('#insertion').disabled=false;
+  document.querySelector('#quick').disabled=false;
+  document.querySelector('#merge').disabled=false;
+  document.querySelector('#selection').disabled=false;
+  document.querySelector('#speed-slider').disabled=false;
+  document.querySelector('#slider').disabled=false;
+  document.querySelector('.new-array-btn').disabled=false;
+}
+
+async function startBubble(){
+  disableBtns();
+  await bubble();
+  enableBtns();
+}
+
+async function insertion(){
+  const arrSpeed = document.getElementById('speed-slider');
+  const delay = 101 - arrSpeed.value;
+
+  console.log('In insertion()');
+  const ele = document.querySelectorAll(".array-bar");
+  // color
+  ele[0].style.background = 'green';
+  for(let i = 1; i < ele.length; i++){
+      console.log('In ith loop');
+      let j = i - 1;
+      let key = ele[i].style.height;
+      // color
+      ele[i].style.background = 'blue';
+
+      await waitforme(delay);
+
+      while(j >= 0 && (parseInt(ele[j].style.height) > parseInt(key))){
+          console.log('In while loop');
+          // color
+          ele[j].style.background = 'blue';
+          ele[j + 1].style.height = ele[j].style.height;
+          j--;
+
+          await waitforme(delay);
+
+          // color
+          for(let k = i; k >= 0; k--){
+              ele[k].style.background = 'green';
+          }
+      }
+      ele[j + 1].style.height = key;
+      // color
+      ele[i].style.background = 'green';
+  }
+}
+
+async function startInsertion(){
+  disableBtns();
+  await insertion();
+  enableBtns();
+}
+
 
 export default function Home() {
   const [array, setArray] = useState([]);
@@ -83,23 +154,23 @@ export default function Home() {
     <>
      <div className="main-page">
      <div className="navbar-container">
-        <div className="new-array-btn"  onClick={resetArray}>
+        <button className="new-array-btn"  onClick={resetArray}>
             New Array
-        </div>
+        </button>
         <div className="sorting-btns">
-            <button disabled={array.length==0 ? true : false} className='sort-btn' onClick={bubble}>
+            <button id='bubble' disabled={array.length==0 ? true : false} className='sort-btn' onClick={startBubble}>
             Bubble Sort
             </button>
-            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            <button id='insertion' disabled={array.length==0 ? true : false} className='sort-btn' onClick={startInsertion}>
             Insertion Sort
             </button>
-            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            <button id='quick' disabled={array.length==0 ? true : false} className='sort-btn'>
             Quick Sort
             </button>
-            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            <button id='merge' disabled={array.length==0 ? true : false} className='sort-btn'>
             Merge Sort
             </button>
-            <button disabled={array.length==0 ? true : false} className='sort-btn'>
+            <button id='selection' disabled={array.length==0 ? true : false} className='sort-btn'>
             Selection Sort
             </button>
         </div>
