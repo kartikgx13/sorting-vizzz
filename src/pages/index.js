@@ -130,7 +130,7 @@ export default function Home() {
     const newarray = [];
     const arrSize=document.getElementById('slider');
     for (let i = 0; i < arrSize.value; i++) {
-      newarray.push(randomIntFromInterval(15, 500));
+      newarray.push(randomIntFromInterval(15, 350));
     }
     setArray(newarray);
 
@@ -144,7 +144,7 @@ export default function Home() {
     const newSize = event.target.value;
     const newarray = [];
     for (let i = 0; i < newSize; i++) {
-      newarray.push(randomIntFromInterval(15, 500));
+      newarray.push(randomIntFromInterval(15, 350));
     }
     setArray(newarray);
   };
@@ -182,7 +182,7 @@ export default function Home() {
             </div>
             <div>
                 <h1>Size</h1>
-                <input disabled={array.length==0 ? true : false} onChange={handleSizeChange} type="range" min={10} max={150} id='slider' className="range-style"></input>
+                <input disabled={array.length==0 ? true : false} onChange={handleSizeChange} type="range" min={10} max={125} id='slider' className="range-style"></input>
             </div>
         </div>
     </div>
@@ -190,7 +190,7 @@ export default function Home() {
      <h1>Sorting Visualizer</h1>
      <div className="sorting-bars">
      {array.length===0 ? (
-      <h1>Click the button to generate an array!!</h1>
+      <h1 style={{justifyContent:"center",alignItems:"center",display:"flex"}}>Click the button to generate an array!!</h1>
      ):(
       <div className="sorting-bars">
         {array.map((value, index) => (
