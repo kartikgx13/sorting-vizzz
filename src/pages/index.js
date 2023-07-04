@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 import { useState } from 'react';
+import Image from 'next/image';
 
 function randomIntFromInterval(min, max) {
   // min and max included
@@ -460,10 +461,13 @@ export default function Home() {
         </div>
     </div>
      <div className="main-heading">
+     <div className="title">
+     <Image src="/images/sort_logo.png" width={25} height={25}/>
      <h1 className='large rise'>Sorting Visualizer</h1>
+     </div>
      <div className="sorting-bars">
      {array.length===0 ? (
-      <h1 style={{justifyContent:"center",alignItems:"center",display:"flex"}}>Click the button to generate an array!!</h1>
+      <h1>Click the button to generate an array!!</h1>
      ):(
       <div className="sorting-bars">
         {array.map((value, index) => (
