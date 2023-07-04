@@ -23,6 +23,30 @@ function waitforme(milisec) {
   }) 
 }
 
+function disableBtns(){
+  document.querySelector('#bubble').disabled=true;
+  document.querySelector('#insertion').disabled=true;
+  document.querySelector('#quick').disabled=true;
+  document.querySelector('#merge').disabled=true;
+  document.querySelector('#selection').disabled=true;
+  document.querySelector('#speed-slider').disabled=true;
+  document.querySelector('#slider').disabled=true;
+  document.querySelector('.new-array-btn').disabled=true;
+}
+
+function enableBtns(){
+  document.querySelector('#bubble').disabled=false;
+  document.querySelector('#insertion').disabled=false;
+  document.querySelector('#quick').disabled=false;
+  document.querySelector('#merge').disabled=false;
+  document.querySelector('#selection').disabled=false;
+  document.querySelector('#speed-slider').disabled=false;
+  document.querySelector('#slider').disabled=false;
+  document.querySelector('.new-array-btn').disabled=false;
+}
+
+
+
 
 
 async function bubble() {
@@ -50,33 +74,7 @@ async function bubble() {
   ele[0].style.background = 'green';
 }
 
-function disableBtns(){
-  document.querySelector('#bubble').disabled=true;
-  document.querySelector('#insertion').disabled=true;
-  document.querySelector('#quick').disabled=true;
-  document.querySelector('#merge').disabled=true;
-  document.querySelector('#selection').disabled=true;
-  document.querySelector('#speed-slider').disabled=true;
-  document.querySelector('#slider').disabled=true;
-  document.querySelector('.new-array-btn').disabled=true;
-}
 
-function enableBtns(){
-  document.querySelector('#bubble').disabled=false;
-  document.querySelector('#insertion').disabled=false;
-  document.querySelector('#quick').disabled=false;
-  document.querySelector('#merge').disabled=false;
-  document.querySelector('#selection').disabled=false;
-  document.querySelector('#speed-slider').disabled=false;
-  document.querySelector('#slider').disabled=false;
-  document.querySelector('.new-array-btn').disabled=false;
-}
-
-async function startBubble(){
-  disableBtns();
-  await bubble();
-  enableBtns();
-}
 
 async function insertion(){
   const arrSpeed = document.getElementById('speed-slider');
@@ -115,11 +113,7 @@ async function insertion(){
   }
 }
 
-async function startInsertion(){
-  disableBtns();
-  await insertion();
-  enableBtns();
-}
+
 
 async function selection(){
   const arrSpeed = document.getElementById('speed-slider');
@@ -160,16 +154,185 @@ async function selection(){
   }
 }
 
-async function startSelection(){
-  disableBtns();
-  await selection();
-  enableBtns();
+async function partitionLomuto(ele, l, r){
+  const arrSpeed = document.getElementById('speed-slider');
+  const delay = 101 - arrSpeed.value;
+
+  console.log('In partitionLomuto()');
+  let i = l - 1;
+  // color pivot element
+  ele[r].style.background = 'red';
+  for(let j = l; j <= r - 1; j++){
+      console.log('In partitionLomuto for j');
+      // color current element
+      ele[j].style.background = 'yellow';
+      // pauseChamp
+      await waitforme(delay);
+
+      if(parseInt(ele[j].style.height) < parseInt(ele[r].style.height)){
+          console.log('In partitionLomuto for j if');
+          i++;
+          swap(ele[i], ele[j]);
+          // color 
+          ele[i].style.background = 'orange';
+          if(i != j) ele[j].style.background = 'orange';
+          // pauseChamp
+          await waitforme(delay);
+      }
+      else{
+          // color if not less than pivot
+          ele[j].style.background = 'pink';
+      }
+  }
+  i++; 
+  // pauseChamp
+  await waitforme(delay);
+  swap(ele[i], ele[r]); // pivot height one
+  console.log(`i = ${i}`, typeof(i));
+  // color
+  ele[r].style.background = 'pink';
+  ele[i].style.background = 'green';
+
+  // pauseChamp
+  await waitforme(delay);
+  
+  // color
+  for(let k = 0; k < ele.length; k++){
+      if(ele[k].style.background != 'green')
+          ele[k].style.background = '#22A39F';
+  }
+
+  return i;
+}
+
+async function quickSort(ele, l, r){
+  console.log('In quickSort()', `l=${l} r=${r}`, typeof(l), typeof(r));
+  if(l < r){
+      let pivot_index = await partitionLomuto(ele, l, r);
+      await quickSort(ele, l, pivot_index - 1);
+      await quickSort(ele, pivot_index + 1, r);
+  }
+  else{
+      if(l >= 0 && r >= 0 && l <ele.length && r <ele.length){
+          ele[r].style.background = 'green';
+          ele[l].style.background = 'green';
+      }
+  }
+}
+
+async function merge(ele, low, mid, high){
+  const arrSpeed = document.getElementById('speed-slider');
+  const delay = 101 - arrSpeed.value;
+
+  console.log('In merge()');
+  console.log(`low=${low}, mid=${mid}, high=${high}`);
+  const n1 = mid - low + 1;
+  const n2 = high - mid;
+  console.log(`n1=${n1}, n2=${n2}`);
+  let left = new Array(n1);
+  let right = new Array(n2);
+
+  for(let i = 0; i < n1; i++){
+      await waitforme(delay);
+      console.log('In merge left loop');
+      console.log(ele[low + i].style.height + ' at ' + (low+i));
+      // color
+      ele[low + i].style.background = 'orange';
+      left[i] = ele[low + i].style.height;
+  }
+  for(let i = 0; i < n2; i++){
+      await waitforme(delay);
+      console.log('In merge right loop');
+      console.log(ele[mid + 1 + i].style.height + ' at ' + (mid+1+i));
+      // color
+      ele[mid + 1 + i].style.background = 'yellow';
+      right[i] = ele[mid + 1 + i].style.height;
+  }
+  await waitforme(delay);
+  let i = 0, j = 0, k = low;
+  while(i < n1 && j < n2){
+      await waitforme(delay);
+      console.log('In merge while loop');
+      console.log(parseInt(left[i]), parseInt(right[j]));
+      
+      // To add color for which two r being compared for merging
+      
+      if(parseInt(left[i]) <= parseInt(right[j])){
+          console.log('In merge while loop if');
+          // color
+          if((n1 + n2) === ele.length){
+              ele[k].style.background = 'green';
+          }
+          else{
+              ele[k].style.background = 'lightgreen';
+          }
+          
+          ele[k].style.height = left[i];
+          i++;
+          k++;
+      }
+      else{
+          console.log('In merge while loop else');
+          // color
+          if((n1 + n2) === ele.length){
+              ele[k].style.background = 'green';
+          }
+          else{
+              ele[k].style.background = 'lightgreen';
+          } 
+          ele[k].style.height = right[j];
+          j++;
+          k++;
+      }
+  }
+  while(i < n1){
+      await waitforme(delay);
+      console.log("In while if n1 is left");
+      // color
+      if((n1 + n2) === ele.length){
+          ele[k].style.background = 'green';
+      }
+      else{
+          ele[k].style.background = 'lightgreen';
+      }
+      ele[k].style.height = left[i];
+      i++;
+      k++;
+  }
+  while(j < n2){
+      await waitforme(delay);
+      console.log("In while if n2 is left");
+      // color
+      if((n1 + n2) === ele.length){
+          ele[k].style.background = 'green';
+      }
+      else{
+          ele[k].style.background = 'lightgreen';
+      }
+      ele[k].style.height = right[j];
+      j++;
+      k++;
+  }
+}
+
+async function mergeSort(ele, l, r){
+  console.log('In mergeSort()');
+  if(l >= r){
+      console.log(`return cause just 1 elemment l=${l}, r=${r}`);
+      return;
+  }
+  const m = l + Math.floor((r - l) / 2);
+  console.log(`left=${l} mid=${m} right=${r}`, typeof(m));
+  await mergeSort(ele, l, m);
+  await mergeSort(ele, m + 1, r);
+  await merge(ele, l, m, r);
 }
 
 
 export default function Home() {
   const [array, setArray] = useState([]);
   const PRIMARY_COLOR = '#22A39F';
+  const [executionTime, setExecutionTime] = useState(0);
   
   const resetArray=()=>{
     const newarray = [];
@@ -178,6 +341,7 @@ export default function Home() {
       newarray.push(randomIntFromInterval(15, 350));
     }
     setArray(newarray);
+    setExecutionTime(0);
 
     const ele = document.querySelectorAll(".array-bar");
     for(let i = 0; i < ele.length; i++){
@@ -193,6 +357,70 @@ export default function Home() {
     }
     setArray(newarray);
   };
+
+  async function startBubble(){
+    disableBtns();
+    const startTime= performance.now()
+    await bubble();
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime*0.001);
+    setExecutionTime(executionTime);
+    enableBtns();
+    
+  }
+
+  async function startInsertion(){
+    disableBtns();
+    const startTime= performance.now()
+    await insertion();
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime*0.001);
+    setExecutionTime(executionTime);
+    enableBtns();
+  }
+
+  async function startSelection(){
+    disableBtns();
+    const startTime= performance.now()
+    await selection();
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime*0.001);
+    setExecutionTime(executionTime);
+    enableBtns();
+  }
+
+  async function startQuickSort(){
+    disableBtns();
+    let ele = document.querySelectorAll('.array-bar');
+    let l = 0;
+    let r = ele.length - 1;
+    const startTime= performance.now()
+    await quickSort(ele,l,r);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime*0.001);
+    setExecutionTime(executionTime);
+    enableBtns();
+  }
+
+  async function startMergeSort(){
+    disableBtns();
+    let ele = document.querySelectorAll('.array-bar');
+    let l = 0;
+    let r = parseInt(ele.length) - 1;
+    const startTime= performance.now()
+    await mergeSort(ele,l,r);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime*0.001);
+    setExecutionTime(executionTime);
+    enableBtns();
+  }
+
+  
    
 
   return (
@@ -212,10 +440,10 @@ export default function Home() {
             <button id='selection' disabled={array.length==0 ? true : false} className='sort-btn' onClick={startSelection}>
             Selection Sort
             </button>
-            <button id='quick' disabled={array.length==0 ? true : false} className='sort-btn'>
+            <button id='quick' disabled={array.length==0 ? true : false} className='sort-btn' onClick={startQuickSort}>
             Quick Sort
             </button>
-            <button id='merge' disabled={array.length==0 ? true : false} className='sort-btn'>
+            <button id='merge' disabled={array.length==0 ? true : false} className='sort-btn' onClick={startMergeSort}>
             Merge Sort
             </button>
         </div>
@@ -232,7 +460,7 @@ export default function Home() {
         </div>
     </div>
      <div className="main-heading">
-     <h1>Sorting Visualizer</h1>
+     <h1 className='large rise'>Sorting Visualizer</h1>
      <div className="sorting-bars">
      {array.length===0 ? (
       <h1 style={{justifyContent:"center",alignItems:"center",display:"flex"}}>Click the button to generate an array!!</h1>
@@ -247,6 +475,9 @@ export default function Home() {
           ))}
       </div>
      )}
+     </div>
+     <div className="exec-time">
+      <h1 style={{color:"white"}}>Time: {Number((executionTime * 0.001).toFixed(2))} s</h1>
      </div>
      </div>
      </div>

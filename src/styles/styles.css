@@ -1,6 +1,7 @@
 body{
 margin: 0;
 padding: 0;
+background-color: #434242;
 }
 .main-page{
     display: flex;
@@ -13,7 +14,7 @@ padding: 0;
     height: 100vh;
     flex-direction: column;
     gap: 15%;
-    background-color: #434242;
+    background-color: #282828;
 }
 
 .main-heading h1{
@@ -29,9 +30,12 @@ padding: 0;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #282828;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     gap: 5rem;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.8px);
+    -webkit-backdrop-filter: blur(5.8px);
 }
 
 .sorting-btns{
@@ -151,11 +155,11 @@ input[type="range"] {
 
 ::-moz-range-track {
     height: 10px;
-    background: #ddd;
+    background: #282828;
 }
 
 ::-moz-range-thumb {
-    background: #fff;
+    background: #282828;
     height: 60px;
     width: 10px;
     border: 3px solid #999;
@@ -169,7 +173,7 @@ input[type="range"] {
 }
 
 ::-ms-thumb { 
-    background: #fff;
+    background: #282828;
     border: 2px solid #999;
     height: 60px;
     width: 10px;
@@ -185,8 +189,8 @@ input[type="range"] {
 }
 
 ::-ms-track { 
-    background: #ddd;
-    color: transparent;
+    background: #282828;
+    color: #282828;
     height: 40px;
     border: none;
 }
@@ -198,15 +202,33 @@ input[type="range"] {
 .sorting-bars{
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: last baseline;
     width: 100%;
-    margin-bottom: 2rem;
-    height: 95%;
+    height: 100%;
     gap: 1px;
+    margin-bottom: 2rem;
 }
 
 .array-bar{
     display: flex;
     width: 5px;
     border: 1px solid black;
+}
+
+.exec-time{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-right: 3rem;
+}
+
+.exec-time h1{
+    padding: 2rem;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    cursor: pointer;
 }
