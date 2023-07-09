@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Deploye Website URL: https://sorting-vizzz.vercel.app/
+Deploye Website URL: https://sortjs.vercel.app/
 
 Clone the repo and run npm install on your terminal to install all the necessary dependancied and node modules
 
