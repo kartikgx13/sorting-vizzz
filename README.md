@@ -26,18 +26,18 @@ Selection Sort sorts an array by repeatedly finding the minimum element and movi
 It's straightforward but not as efficient as other sorting methods for larger datasets.
 
 ## How to Use
-Select a sorting algorithm from the menu.
-Click the "Generate New Array" button to create a new array of elements to be sorted.
-Adjust the speed slider to control the visualization speed.
-You can increase the size of the input array by using the size slider.
-Click the "Sort" button to start the visualization.
-Watch as the algorithm visually sorts the elements, and observe how different algorithms perform.
+- Select a sorting algorithm from the menu.
+- Click the "Generate New Array" button to create a new array of elements to be sorted.
+- Adjust the speed slider to control the visualization speed.
+- You can increase the size of the input array by using the size slider.
+- Click the "Sort" button to start the visualization.
+- Watch as the algorithm visually sorts the elements, and observe how different algorithms perform.
 
 ## Features
-Real-time visualization of sorting algorithms.
-Adjustable animation speed to suit your learning pace.
-Generate new arrays for sorting at any time.
-Gain insights into the mechanics of each sorting algorithm.
+- Real-time visualization of sorting algorithms.
+- Adjustable animation speed to suit your learning pace.
+- Generate new arrays for sorting at any time.
+- Gain insights into the mechanics of each sorting algorithm.
 
 ## Contributing
 We welcome contributions to enhance this Sorting Visualizer. Feel free to fork the repository, make improvements, and submit pull requests.
