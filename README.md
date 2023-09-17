@@ -1,20 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Sorting Visualizer Web Application
+Welcome to the Sorting Visualizer! This web application allows you to visualize various sorting algorithms in action. You can gain a better understanding of how these sorting algorithms work by watching them sort data in real-time. Below, you'll find a brief overview of the sorting algorithms available in this visualizer.
 
-Deploye Website URL: https://sortjs.vercel.app/
+## Sorting Algorithms
+1. Merge Sort
+Merge Sort is a divide-and-conquer sorting algorithm.
+It divides the input into smaller sections, sorts them, and then merges them back together.
+Known for its stability and efficiency.
 
-Clone the repo and run npm install on your terminal to install all the necessary dependancied and node modules
+2. Quick Sort
+Quick Sort is also a divide-and-conquer algorithm.
+It selects a "pivot" element and partitions the other elements into two sub-arrays.
+One of the fastest sorting algorithms, often used in practice.
 
-First, run the development server:
+3. Bubble Sort
+Bubble Sort repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
+Simple to understand but less efficient for large datasets.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+4. Insertion Sort
+Insertion Sort builds the final sorted array one item at a time.
+It is efficient for small datasets and is often used for building more complex algorithms.
+
+5. Selection Sort
+Selection Sort sorts an array by repeatedly finding the minimum element and moving it to the beginning.
+It's straightforward but not as efficient as other sorting methods for larger datasets.
+
+## How to Use
+Select a sorting algorithm from the menu.
+Click the "Generate New Array" button to create a new array of elements to be sorted.
+Adjust the speed slider to control the visualization speed.
+You can increase the size of the input array by using the size slider.
+Click the "Sort" button to start the visualization.
+Watch as the algorithm visually sorts the elements, and observe how different algorithms perform.
+
+## Features
+Real-time visualization of sorting algorithms.
+Adjustable animation speed to suit your learning pace.
+Generate new arrays for sorting at any time.
+Gain insights into the mechanics of each sorting algorithm.
+
+## Contributing
+We welcome contributions to enhance this Sorting Visualizer. Feel free to fork the repository, make improvements, and submit pull requests.
+
+## Usage
+Visit the [Live Demo](https://sortjs.vercel.app/) to explore the application.
+Add your expenses and income on the respective pages.
+Check the Dashboard and Transactions pages to monitor your finances.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
